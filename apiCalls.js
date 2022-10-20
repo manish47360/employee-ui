@@ -1,6 +1,8 @@
+var api_url = "http://localhost:8083/employees"
+
 $(document).ready(function(){
     $.ajax({
-        url: "http://localhost:8083/employees",
+        url: api_url,
         success: function(result){
             console.log(result);
             var data = "";
@@ -15,7 +17,7 @@ $(document).ready(function(){
     console.log(id)
     if(id > 0){
         $.ajax({
-            url: "http://localhost:8083/employees/"+id,
+            url: api_url+"/"+id,
             success: function(result){
                 console.log(result)
                 $("#name").val(result.name);
@@ -35,7 +37,7 @@ $(".empForm").submit(function(e){
     data['address'] = $("#address").val();
     console.log(data)
     $.ajax({
-        url: "http://localhost:8083/employees",
+        url: api_url,
         method: "POST",
         headers: {"Content-Type":"application/json"},
         data: JSON.stringify(data),
@@ -53,7 +55,7 @@ $(".empEditForm").submit(function(e){
     data['address'] = $("#address").val();
     console.log(data)
     $.ajax({
-        url: "http://localhost:8083/employees/"+$("#empId").val(),
+        url: api_url+"/"+$("#empId").val(),
         method: "PUT",
         headers: {"Content-Type":"application/json"},
         data: JSON.stringify(data),
@@ -66,7 +68,7 @@ $(".empEditForm").submit(function(e){
 function deleteEmp(id) {
     if(confirm("Are you sure, you want to Delete this Employee?")){
         $.ajax({
-            url: "http://localhost:8083/employees/"+id,
+            url: api_url+"/"+id,
             method: "DELETE",
             success: function(result){
                 window.location.href="index.html"
